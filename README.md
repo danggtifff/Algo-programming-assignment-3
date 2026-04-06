@@ -46,26 +46,28 @@ Ran python3 src/benchmark.py to create random input files and ran them
 
 ## Question 2: Recurrence Equation
 
-### Def. dp[i][j] = max value common subsequence of A[1, …, i] and B[1, …, j].
+**Def.** dp[i][j] = max value common subsequence of A[1, …, i] and B[1, …, j].
 
-Base cases: dp[0][j] = 0 and dp[i][0] = 0 (if either prefix is empty, no common subsequence)
+**Base cases:** dp[0][j] = 0 and dp[i][0] = 0 (if either prefix is empty, no common subsequence)
 
-Case 1: A[i] = B[j] => the characters match.
+**Case 1:** A[i] = B[j] => the characters match.
 
 Can extend the best solution for A[1…i-1] and B[1…j-1] by appending this character, adding v(A[i])
 
-Case 2: A[i] ≠ B[j] => the characters don't match.
+**Case 2:** A[i] ≠ B[j] => the characters don't match.
 
 Either skip A[i] → look at dp[i-1][j]
 Or skip B[j] → look at dp[i][j-1]
 Take the better one.
 
 ### Recurrence eq:
-
+```
 dp [i][j] = {
     dp [i-1][j-1] + v(A[i])           if A[i] = B[j]
     max(dp [i-1][j], dp [i][j-1])     otherwise
 }
+```
+
 
 ## Question 3: Big-O
 ```bash
