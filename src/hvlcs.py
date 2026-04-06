@@ -56,3 +56,18 @@ def solve(input_text: str) -> tuple[int, str]:
  
     m = len(A)
     n = len(B)
+
+def main():
+    if len(sys.argv) > 1:
+        with open(sys.argv[1], "r") as f:
+            input_text = f.read()
+    else:
+        input_text = sys.stdin.read()
+ 
+    max_value, subsequence = solve(input_text)
+    print(max_value)
+    print(subsequence)
+ 
+ 
+if __name__ == "__main__":
+    main()
