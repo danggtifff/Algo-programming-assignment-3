@@ -2,13 +2,47 @@
 
 Name: Tiffany Dang (UFID: 14332676)
 
-• Instructions to compile/build your code (if applicable).
+## How to run
+To run the algorithm with an input file:
+```bash
+python3 src/hvlcs.py data/[input_file]
+```
+Example:
+```bash
+python3 src/hvlcs.py data/example.in
+```
+
+To generate 12 tests and a table with runtime information:
+```bash
+python3 src/benchmark.py
+```
+
 • Instructions to run the code that runs each of the eviction policies, including
 example commands.
 • Any assumptions (input/output format, dependencies, etc.).
 • Your solution to the written component, i.e., Questions 1, 2, and 3.
 
 ## Question 1: Empirical Comparison
+
+Ran python3 src/benchmark.py to create random input files and ran them
+
+Test   Len A    Len B    m*n          Time (s)  
+--------------------------------------------
+1      25       50       1250         0.0002
+2      50       100      5000         0.0006
+3      75       150      11250        0.0014
+4      100      100      10000        0.0013
+5      200      150      30000        0.0037
+6      200      200      40000        0.0052
+7      300      400      120000       0.0238
+8      400      400      160000       0.0290
+9      500      750      375000       0.0550
+10     750      750      562500       0.0871
+11     1000     1000     1000000      0.1718
+12     1000     1500     1500000      0.2277
+
+## m*n by runtime graph
+![Runtime Graph](data/HVLCS_graph.png)
 
 ## Question 2: Recurrence Equation
 
@@ -34,3 +68,18 @@ dp [i][j] = {
 }
 
 ## Question 3: Big-O
+```bash
+HVLCS(string A w/ length m, string B w/ length n, value function v):
+    for i from 0 to m: <= O(m)
+        dp[i, 0] = 0
+    for j from 0 to n: <= O(n)
+        dp[0, j] = 0
+    for i from 1 to m: <= O(m) * O(n)
+        for j from 1 to n:
+            if A[i] = B[j]:
+                dp[i, j] = dp[i-1, j-1] + v(A[i])
+            else
+                dp[i, j] = max(dp[i-1, j], dp[i, j-1])
+    return dp[m, n]
+```
+The runtime of the algorithm is O(m * n) because there are 2 nested loops that iterate m and n times respectively, and each interation only does O(1) work. Other parts of the algorithm are initializing the table which is only O(m + n) which is dominated by the O(m * n) term. So, the overall runtime is O(m * n).
