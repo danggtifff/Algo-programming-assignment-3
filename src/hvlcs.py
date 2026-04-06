@@ -36,7 +36,7 @@ import sys
 
 def solve(input_text: str) -> tuple[int, str]:
     # parse the input text
-    lines = input_text.strip().split("/n")
+    lines = input_text.strip().split("\n")
     idx = 0
     
     K = int(lines[idx].strip())
